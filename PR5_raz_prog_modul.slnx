@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../HashPasswords/HashPasswords.csproj" />
+  <Project Path="PR5_raz_prog_modul.csproj" />
+</Solution>

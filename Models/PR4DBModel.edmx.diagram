@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="932392565af64b04a79c5e81cd31c440" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.categories" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.clients" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.deliveries" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.employees" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.order_details" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.order_statuses" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.orders" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.persons" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.products" Width="1.5" PointX="5.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.repair_requests" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.repair_statuses" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__products__id_cat__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__clients__id_pers__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__orders__id_clien__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__repair_re__id_cl__02084FDA" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__deliverie__id_pr__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__employees__id_pe__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__repair_re__id_ma__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__order_det__id_or__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__order_det__id_pr__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__orders__id_order__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__repair_re__id_re__03F0984C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Computer_Company_FixDBModel.users" Width="1.5" PointX="1" PointY="12" />
+        <AssociationConnector Association="Computer_Company_FixDBModel.FK__users__id_person__1AD3FDA4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

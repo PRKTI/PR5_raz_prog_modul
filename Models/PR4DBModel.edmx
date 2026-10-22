@@ -1,0 +1,895 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Computer_Company_FixDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_person" Type="int" Nullable="false" />
+          <Property Name="delivery_address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="deliveries">
+          <Key>
+            <PropertyRef Name="id_delivery" />
+          </Key>
+          <Property Name="id_delivery" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="dealer_name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="supply_quantity" Type="int" Nullable="false" />
+          <Property Name="purchase_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="delivery_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id_master" />
+          </Key>
+          <Property Name="id_master" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_person" Type="int" Nullable="false" />
+          <Property Name="position" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="id_order_detail" />
+          </Key>
+          <Property Name="id_order_detail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_order" Type="int" />
+          <Property Name="id_product" Type="int" />
+          <Property Name="sale_quantity" Type="int" Nullable="false" />
+          <Property Name="unit_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="order_statuses">
+          <Key>
+            <PropertyRef Name="id_order_status" />
+          </Key>
+          <Property Name="id_order_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="order_date" Type="datetime" />
+          <Property Name="id_order_status" Type="int" />
+          <Property Name="delivery_type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="id_person" />
+          </Key>
+          <Property Name="id_person" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_category" Type="int" />
+          <Property Name="product_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="stock_quantity" Type="int" />
+          <Property Name="warranty_months" Type="int" />
+          <Property Name="is_archived" Type="bit" />
+        </EntityType>
+        <EntityType Name="repair_requests">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" />
+          <Property Name="id_master" Type="int" />
+          <Property Name="device_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="serial_number" Type="nvarchar" MaxLength="100" />
+          <Property Name="issue_description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="id_repair_status" Type="int" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="deadline" Type="datetime" />
+          <Property Name="repair_cost" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="warranty_days" Type="int" />
+        </EntityType>
+        <EntityType Name="repair_statuses">
+          <Key>
+            <PropertyRef Name="id_repair_status" />
+          </Key>
+          <Property Name="id_repair_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_person" Type="int" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password_hash" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__clients__id_pers__66603565">
+          <End Role="persons" Type="Self.persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__deliverie__id_pr__0A9D95DB">
+          <End Role="products" Type="Self.products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="deliveries">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__id_pe__693CA210">
+          <End Role="persons" Type="Self.persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__id_or__7D439ABD">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__id_pr__7E37BEF6">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__id_clien__76969D2E">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__id_order__787EE5A0">
+          <End Role="order_statuses" Type="Self.order_statuses" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_statuses">
+              <PropertyRef Name="id_order_status" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_order_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__products__id_cat__6EF57B66">
+          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_cl__02084FDA">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_ma__02FC7413">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id_master" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_re__03F0984C">
+          <End Role="repair_statuses" Type="Self.repair_statuses" Multiplicity="0..1" />
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repair_statuses">
+              <PropertyRef Name="id_repair_status" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_repair_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__id_person__1AD3FDA4">
+          <End Role="persons" Type="Self.persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Computer_Company_FixDBModelContainer">
+          <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="deliveries" EntityType="Self.deliveries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_statuses" EntityType="Self.order_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="persons" EntityType="Self.persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repair_requests" EntityType="Self.repair_requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="repair_statuses" EntityType="Self.repair_statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__clients__id_pers__66603565" Association="Self.FK__clients__id_pers__66603565">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__deliverie__id_pr__0A9D95DB" Association="Self.FK__deliverie__id_pr__0A9D95DB">
+            <End Role="products" EntitySet="products" />
+            <End Role="deliveries" EntitySet="deliveries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__id_pe__693CA210" Association="Self.FK__employees__id_pe__693CA210">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__id_or__7D439ABD" Association="Self.FK__order_det__id_or__7D439ABD">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__id_pr__7E37BEF6" Association="Self.FK__order_det__id_pr__7E37BEF6">
+            <End Role="products" EntitySet="products" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__id_clien__76969D2E" Association="Self.FK__orders__id_clien__76969D2E">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__id_order__787EE5A0" Association="Self.FK__orders__id_order__787EE5A0">
+            <End Role="order_statuses" EntitySet="order_statuses" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__products__id_cat__6EF57B66" Association="Self.FK__products__id_cat__6EF57B66">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_cl__02084FDA" Association="Self.FK__repair_re__id_cl__02084FDA">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_ma__02FC7413" Association="Self.FK__repair_re__id_ma__02FC7413">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_re__03F0984C" Association="Self.FK__repair_re__id_re__03F0984C">
+            <End Role="repair_statuses" EntitySet="repair_statuses" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__id_person__1AD3FDA4" Association="Self.FK__users__id_person__1AD3FDA4">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Computer_Company_FixDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categories">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="products" Relationship="Self.FK__products__id_cat__6EF57B66" FromRole="categories" ToRole="products" />
+        </EntityType>
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_person" Type="Int32" Nullable="false" />
+          <Property Name="delivery_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="persons" Relationship="Self.FK__clients__id_pers__66603565" FromRole="clients" ToRole="persons" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__id_clien__76969D2E" FromRole="clients" ToRole="orders" />
+          <NavigationProperty Name="repair_requests" Relationship="Self.FK__repair_re__id_cl__02084FDA" FromRole="clients" ToRole="repair_requests" />
+        </EntityType>
+        <EntityType Name="deliveries">
+          <Key>
+            <PropertyRef Name="id_delivery" />
+          </Key>
+          <Property Name="id_delivery" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="dealer_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="supply_quantity" Type="Int32" Nullable="false" />
+          <Property Name="purchase_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="products" Relationship="Self.FK__deliverie__id_pr__0A9D95DB" FromRole="deliveries" ToRole="products" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id_master" />
+          </Key>
+          <Property Name="id_master" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_person" Type="Int32" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="persons" Relationship="Self.FK__employees__id_pe__693CA210" FromRole="employees" ToRole="persons" />
+          <NavigationProperty Name="repair_requests" Relationship="Self.FK__repair_re__id_ma__02FC7413" FromRole="employees" ToRole="repair_requests" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="id_order_detail" />
+          </Key>
+          <Property Name="id_order_detail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_order" Type="Int32" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="sale_quantity" Type="Int32" Nullable="false" />
+          <Property Name="unit_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__order_det__id_or__7D439ABD" FromRole="order_details" ToRole="orders" />
+          <NavigationProperty Name="products" Relationship="Self.FK__order_det__id_pr__7E37BEF6" FromRole="order_details" ToRole="products" />
+        </EntityType>
+        <EntityType Name="order_statuses">
+          <Key>
+            <PropertyRef Name="id_order_status" />
+          </Key>
+          <Property Name="id_order_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__id_order__787EE5A0" FromRole="order_statuses" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="order_date" Type="DateTime" Precision="3" />
+          <Property Name="id_order_status" Type="Int32" />
+          <Property Name="delivery_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="clients" Relationship="Self.FK__orders__id_clien__76969D2E" FromRole="orders" ToRole="clients" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK__order_det__id_or__7D439ABD" FromRole="orders" ToRole="order_details" />
+          <NavigationProperty Name="order_statuses" Relationship="Self.FK__orders__id_order__787EE5A0" FromRole="orders" ToRole="order_statuses" />
+        </EntityType>
+        <EntityType Name="persons">
+          <Key>
+            <PropertyRef Name="id_person" />
+          </Key>
+          <Property Name="id_person" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="clients" Relationship="Self.FK__clients__id_pers__66603565" FromRole="persons" ToRole="clients" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__id_pe__693CA210" FromRole="persons" ToRole="employees" />
+          <NavigationProperty Name="users" Relationship="Computer_Company_FixDBModel.FK__users__id_person__1AD3FDA4" FromRole="persons" ToRole="users" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id_product" />
+          </Key>
+          <Property Name="id_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_category" Type="Int32" />
+          <Property Name="product_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="stock_quantity" Type="Int32" />
+          <Property Name="warranty_months" Type="Int32" />
+          <Property Name="is_archived" Type="Boolean" />
+          <NavigationProperty Name="categories" Relationship="Self.FK__products__id_cat__6EF57B66" FromRole="products" ToRole="categories" />
+          <NavigationProperty Name="deliveries" Relationship="Self.FK__deliverie__id_pr__0A9D95DB" FromRole="products" ToRole="deliveries" />
+          <NavigationProperty Name="order_details" Relationship="Self.FK__order_det__id_pr__7E37BEF6" FromRole="products" ToRole="order_details" />
+        </EntityType>
+        <EntityType Name="repair_requests">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" />
+          <Property Name="id_master" Type="Int32" />
+          <Property Name="device_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="serial_number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="issue_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_repair_status" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="deadline" Type="DateTime" Precision="3" />
+          <Property Name="repair_cost" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="warranty_days" Type="Int32" />
+          <NavigationProperty Name="clients" Relationship="Self.FK__repair_re__id_cl__02084FDA" FromRole="repair_requests" ToRole="clients" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__repair_re__id_ma__02FC7413" FromRole="repair_requests" ToRole="employees" />
+          <NavigationProperty Name="repair_statuses" Relationship="Self.FK__repair_re__id_re__03F0984C" FromRole="repair_requests" ToRole="repair_statuses" />
+        </EntityType>
+        <EntityType Name="repair_statuses">
+          <Key>
+            <PropertyRef Name="id_repair_status" />
+          </Key>
+          <Property Name="id_repair_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="repair_requests" Relationship="Self.FK__repair_re__id_re__03F0984C" FromRole="repair_statuses" ToRole="repair_requests" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__products__id_cat__6EF57B66">
+          <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categories">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__clients__id_pers__66603565">
+          <End Role="persons" Type="Self.persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__id_clien__76969D2E">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_cl__02084FDA">
+          <End Role="clients" Type="Self.clients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__deliverie__id_pr__0A9D95DB">
+          <End Role="products" Type="Self.products" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="deliveries" Type="Self.deliveries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="deliveries">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__id_pe__693CA210">
+          <End Role="persons" Type="Self.persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_ma__02FC7413">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id_master" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_master" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__id_or__7D439ABD">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_det__id_pr__7E37BEF6">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id_product" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__id_order__787EE5A0">
+          <End Role="order_statuses" Type="Self.order_statuses" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order_statuses">
+              <PropertyRef Name="id_order_status" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_order_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__repair_re__id_re__03F0984C">
+          <End Role="repair_statuses" Type="Self.repair_statuses" Multiplicity="0..1" />
+          <End Role="repair_requests" Type="Self.repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="repair_statuses">
+              <PropertyRef Name="id_repair_status" />
+            </Principal>
+            <Dependent Role="repair_requests">
+              <PropertyRef Name="id_repair_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Computer_Company_FixDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="Self.categories" />
+          <EntitySet Name="clients" EntityType="Self.clients" />
+          <EntitySet Name="deliveries" EntityType="Self.deliveries" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" />
+          <EntitySet Name="order_statuses" EntityType="Self.order_statuses" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="persons" EntityType="Self.persons" />
+          <EntitySet Name="products" EntityType="Self.products" />
+          <EntitySet Name="repair_requests" EntityType="Self.repair_requests" />
+          <EntitySet Name="repair_statuses" EntityType="Self.repair_statuses" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__products__id_cat__6EF57B66" Association="Self.FK__products__id_cat__6EF57B66">
+            <End Role="categories" EntitySet="categories" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__clients__id_pers__66603565" Association="Self.FK__clients__id_pers__66603565">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__id_clien__76969D2E" Association="Self.FK__orders__id_clien__76969D2E">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_cl__02084FDA" Association="Self.FK__repair_re__id_cl__02084FDA">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__deliverie__id_pr__0A9D95DB" Association="Self.FK__deliverie__id_pr__0A9D95DB">
+            <End Role="products" EntitySet="products" />
+            <End Role="deliveries" EntitySet="deliveries" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__id_pe__693CA210" Association="Self.FK__employees__id_pe__693CA210">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_ma__02FC7413" Association="Self.FK__repair_re__id_ma__02FC7413">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__id_or__7D439ABD" Association="Self.FK__order_det__id_or__7D439ABD">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_det__id_pr__7E37BEF6" Association="Self.FK__order_det__id_pr__7E37BEF6">
+            <End Role="products" EntitySet="products" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__id_order__787EE5A0" Association="Self.FK__orders__id_order__787EE5A0">
+            <End Role="order_statuses" EntitySet="order_statuses" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__repair_re__id_re__03F0984C" Association="Self.FK__repair_re__id_re__03F0984C">
+            <End Role="repair_statuses" EntitySet="repair_statuses" />
+            <End Role="repair_requests" EntitySet="repair_requests" />
+          </AssociationSet>
+          <EntitySet Name="users" EntityType="Computer_Company_FixDBModel.users" />
+          <AssociationSet Name="FK__users__id_person__1AD3FDA4" Association="Computer_Company_FixDBModel.FK__users__id_person__1AD3FDA4">
+            <End Role="persons" EntitySet="persons" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_person" Type="Int32" Nullable="false" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password_hash" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="persons" Relationship="Computer_Company_FixDBModel.FK__users__id_person__1AD3FDA4" FromRole="users" ToRole="persons" />
+        </EntityType>
+        <Association Name="FK__users__id_person__1AD3FDA4">
+          <End Type="Computer_Company_FixDBModel.persons" Role="persons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Computer_Company_FixDBModel.users" Role="users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persons">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Computer_Company_FixDBModelContainer" CdmEntityContainer="Computer_Company_FixDBEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.categories">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.clients">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="deliveries">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.deliveries">
+              <MappingFragment StoreEntitySet="deliveries">
+                <ScalarProperty Name="id_delivery" ColumnName="id_delivery" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="dealer_name" ColumnName="dealer_name" />
+                <ScalarProperty Name="supply_quantity" ColumnName="supply_quantity" />
+                <ScalarProperty Name="purchase_price" ColumnName="purchase_price" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="id_master" ColumnName="id_master" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="position" ColumnName="position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_details">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.order_details">
+              <MappingFragment StoreEntitySet="order_details">
+                <ScalarProperty Name="id_order_detail" ColumnName="id_order_detail" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="sale_quantity" ColumnName="sale_quantity" />
+                <ScalarProperty Name="unit_price" ColumnName="unit_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_statuses">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.order_statuses">
+              <MappingFragment StoreEntitySet="order_statuses">
+                <ScalarProperty Name="id_order_status" ColumnName="id_order_status" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="id_order_status" ColumnName="id_order_status" />
+                <ScalarProperty Name="delivery_type" ColumnName="delivery_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persons">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.persons">
+              <MappingFragment StoreEntitySet="persons">
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="stock_quantity" ColumnName="stock_quantity" />
+                <ScalarProperty Name="warranty_months" ColumnName="warranty_months" />
+                <ScalarProperty Name="is_archived" ColumnName="is_archived" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="repair_requests">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.repair_requests">
+              <MappingFragment StoreEntitySet="repair_requests">
+                <ScalarProperty Name="id_request" ColumnName="id_request" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_master" ColumnName="id_master" />
+                <ScalarProperty Name="device_name" ColumnName="device_name" />
+                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
+                <ScalarProperty Name="issue_description" ColumnName="issue_description" />
+                <ScalarProperty Name="id_repair_status" ColumnName="id_repair_status" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="repair_cost" ColumnName="repair_cost" />
+                <ScalarProperty Name="warranty_days" ColumnName="warranty_days" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="repair_statuses">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.repair_statuses">
+              <MappingFragment StoreEntitySet="repair_statuses">
+                <ScalarProperty Name="id_repair_status" ColumnName="id_repair_status" />
+                <ScalarProperty Name="status_name" ColumnName="status_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="Computer_Company_FixDBModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="password_hash" ColumnName="password_hash" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
